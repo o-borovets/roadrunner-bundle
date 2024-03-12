@@ -17,7 +17,6 @@ use Baldinof\RoadRunnerBundle\Reboot\KernelRebootStrategyInterface;
 use Baldinof\RoadRunnerBundle\RoadRunnerBridge\HttpFoundationWorker;
 use Baldinof\RoadRunnerBundle\RoadRunnerBridge\HttpFoundationWorkerInterface;
 use Baldinof\RoadRunnerBundle\Worker\GrpcWorker as InternalGrpcWorker;
-use Baldinof\RoadRunnerBundle\Worker\GrpcWorkerInterface;
 use Baldinof\RoadRunnerBundle\Worker\HttpDependencies;
 use Baldinof\RoadRunnerBundle\Worker\HttpWorker as InternalHttpWorker;
 use Baldinof\RoadRunnerBundle\Worker\WorkerRegistry;
@@ -136,7 +135,7 @@ return static function (ContainerConfigurator $container) {
                 service(GrpcInvoker::class),
             ]);
 
-        $services->set(GrpcWorkerInterface::class, InternalGrpcWorker::class)
+        $services->set(InternalGrpcWorker::class)
             ->public() // Manually retrieved on the DIC in the Worker if the kernel has been rebooted
             ->tag('monolog.logger', ['channel' => BaldinofRoadRunnerExtension::MONOLOG_CHANNEL])
             ->args([
@@ -150,7 +149,7 @@ return static function (ContainerConfigurator $container) {
             ->get(WorkerRegistryInterface::class)
             ->call('registerWorker', [
                 Environment\Mode::MODE_GRPC,
-                service(GrpcWorkerInterface::class),
+                service(InternalGrpcWorker::class),
             ]);
     }
 };
