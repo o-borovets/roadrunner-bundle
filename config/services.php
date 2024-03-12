@@ -37,14 +37,6 @@ use Spiral\RoadRunner\WorkerInterface as RoadRunnerWorkerInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-// Polyfill of the `service()` function introduced in Symfony 5.1 when using older version
-if (!\function_exists('Symfony\Component\DependencyInjection\Loader\Configurator\service')) {
-    function service(string $id): ReferenceConfigurator
-    {
-        return ref($id); // @phpstan-ignore-line
-    }
-}
-
 return static function (ContainerConfigurator $container) {
     $container->parameters()
         ->set('baldinof_road_runner.intercept_side_effect', true);
