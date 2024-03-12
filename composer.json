@@ -26,9 +26,10 @@
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/http-kernel": "^5.4 || ^6.0",
         "symfony/yaml": "^5.4 || ^6.0",
-        "spiral/roadrunner": "^2.0.2",
-        "spiral/roadrunner-worker": "^2.1.4",
-        "spiral/goridge": "^3.0",
+        "spiral/roadrunner": "^2023.3.0",
+        "spiral/roadrunner-http": "^3.0",
+        "spiral/roadrunner-worker": "^3.0",
+        "spiral/goridge": "^4.0",
         "symfony/psr-http-message-bridge": "^1.1 || ^2.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0"
     },
@@ -51,11 +52,11 @@
         "doctrine/doctrine-bundle": "^2.1.1",
         "doctrine/orm": "^2.7.3",
         "symfony/proxy-manager-bridge": "^5.4 || ^6.0",
-        "spiral/roadrunner-metrics": "^2.0.1",
+        "spiral/roadrunner-metrics": "^3.0",
         "mikey179/vfsstream": "^1.6.8",
         "symfony/runtime": "^5.4 || ^6.0",
         "laminas/laminas-zendframework-bridge": "^1.4",
-        "spiral/roadrunner-grpc": "^2.0"
+        "spiral/roadrunner-grpc": "^3.0"
     },
     "conflict": {
         "doctrine/doctrine-bundle": "<2.1.1",
