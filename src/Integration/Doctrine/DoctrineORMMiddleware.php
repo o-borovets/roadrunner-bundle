@@ -16,6 +16,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\VarExporter\LazyObjectInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class DoctrineORMMiddleware implements MiddlewareInterface
@@ -33,9 +34,6 @@ final class DoctrineORMMiddleware implements MiddlewareInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(Request $request, HttpKernelInterface $next): \Iterator
     {
         $connectionServices = $this->managerRegistry->getConnectionNames();
@@ -70,8 +68,11 @@ final class DoctrineORMMiddleware implements MiddlewareInterface
             $manager = $this->container->get($managerName);
 
             \assert($manager instanceof EntityManagerInterface);
-
             if ($manager instanceof LazyLoadingInterface) {
+                continue; // Doctrine bundle will handle manager reset on next request
+            }
+
+            if ($manager instanceof LazyObjectInterface) {
                 continue; // Doctrine bundle will handle manager reset on next request
             }
 

@@ -14,7 +14,7 @@ use function sprintf;
 /**
  * @internal
  */
-final class GrpcWorker implements GrpcWorkerInterface
+final class GrpcWorker implements WorkerInterface
 {
     private LoggerInterface $logger;
     private RoadRunnerWorker $roadRunnerWorker;
